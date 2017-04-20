@@ -5,5 +5,5 @@
 * Randomer.java
 2. 2-е задание, две задачи:
 * Tasks.java  (task1-4)
-* EnumTask
+* EnumTask.java
 2. 3-е задание:
