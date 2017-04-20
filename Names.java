@@ -1,11 +1,10 @@
-package com.company;
 
 import java.util.Scanner;
 
 /**
  * Задание номер 10
  */
-public class Main {
+public class Names {
 
     public static void main(String[] args) {
         String lname;
@@ -22,6 +21,4 @@ public class Main {
         System.out.println( lname+" "+fname+" "+age);
 
     }
-
-
 }

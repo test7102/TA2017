@@ -1,4 +1,3 @@
-package com.company;
 /**
  * Задание номер 9
  */
