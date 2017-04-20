@@ -93,38 +93,34 @@ public class Tasks {
             st = sc.nextLine();
 
             st = st.toLowerCase();
-            String alpbt = "abcdefghijklmnopqrstuvwxyz";
             String vowels = "aeiouy";
-            String consonants = "bcdfghjklmnpqrstvwxz";
 
-            for (int i = 0; i < alpbt.length(); i++) {
-                if (st.contains(String.valueOf(alpbt.charAt(i)))) {
+            for (int i = 0; i < st.length(); i++) {
+                char chr = st.charAt(i);
+                if (chr >= 97 && chr <= 122) {
                     latin++;
                 }
             }
-            for (int j = 0; j < vowels.length(); j++) {
-                if (st.contains(String.valueOf(vowels.charAt(j)))) {
+            for (int j = 0; j < st.length(); j++) {
+                char chr = st.charAt(j);
+                if ( chr == 97 || chr == 101 || chr == 105 || chr == 111 || chr == 117 || chr == 121 ) {
                     vowls++;
                 }
-            }
-            for (int j = 0; j < consonants.length(); j++) {
-                if (st.contains(String.valueOf(consonants.charAt(j)))) {
-                    cons++;
-                }
+                else cons++;
             }
 
-            System.out.println("vowls " + vowls + " cons " + cons+" lat "+latin);
             if (latin == st.length()) {
                 latinWords++;
             }
             if (vowls == cons) {
                 equalsWords++;
             }
+            System.out.println("vowls " + vowls + " cons " + cons + " lat " + latin);
 
 
             k++;
         }
-        System.out.println("Latin words "+latinWords+" equalsWords "+equalsWords);
+        System.out.println("Latin words " + latinWords + " equalsWords " + equalsWords);
     }
 
 
