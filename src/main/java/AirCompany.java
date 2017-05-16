@@ -19,7 +19,7 @@ public class AirCompany {
 	
 	private static class AirCraftRegistrator {
 		
-		private static final ArrayList<String> BOARDNUMBERS = new ArrayList();
+		private static final ArrayList<String> BOARDNUMBERS = new ArrayList<String>();
 		
 		public static boolean isBoardnumberAllowed(String registrationCode) {
 			return !BOARDNUMBERS.contains(registrationCode);
@@ -104,6 +104,5 @@ public class AirCompany {
 		
 	}
 	
-	//TODO findPlane()
 	
 }
