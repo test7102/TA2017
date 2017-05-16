@@ -1,17 +1,16 @@
 package main.java;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import main.java.annotations.ByPassengers;
 import main.java.annotations.ByRange;
 import main.java.exceptions.RegistrationCodeFormatException;
 import main.java.exceptions.RegistrationException;
+import main.java.interfaces.IAircraftInfo;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class AirCompany {
+public class AirCompany implements IAircraftInfo{
 	private String name;
 	private Headquarters headquarters;
 	
@@ -159,5 +158,16 @@ public class AirCompany {
 		System.out.println((coutResults == 0) ? "did not match any aircraft" : coutResults + " was found");
 	}
 	
+	/**
+	 * Method, prints all airfleet of that aircompany.
+	 */
+	@Override
+	public void printAircraftInfo () {
+		System.out.printf("%-18s |%-13s |%-12s |%-5s |%-10s |%-10s","registration code", "model", "manufacturer", "crew", "passengers", "range(km)\n");
+		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {
+			System.out.printf("%-18s |",entry.getKey());
+			entry.getValue().printAircraftInfo();
+		}
+	}
 	
 }

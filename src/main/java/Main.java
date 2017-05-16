@@ -1,11 +1,8 @@
 package main.java;
 
-import main.java.annotations.ByPassengers;
-import main.java.annotations.ByRange;
 import main.java.util.PrintDelimeter;
 import main.java.util.CompanyPlanesFiller;
 
-import java.lang.reflect.InvocationTargetException;
 
 public class Main {
 	
@@ -40,11 +37,12 @@ public class Main {
 		
 		
 		try {
-			
 			aeroflot.findAircraft(100,190);
 		} catch (ReflectiveOperationException e) {
 			e.printStackTrace();
 		}
+		PrintDelimeter.print();
+		aeroflot.printAircraftInfo();
 		
 		
 	}
