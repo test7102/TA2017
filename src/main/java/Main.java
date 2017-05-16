@@ -1,6 +1,7 @@
 package main.java;
 
 import main.java.annotations.ByPassengers;
+import main.java.annotations.ByRange;
 import main.java.util.PrintDelimeter;
 import main.java.util.CompanyPlanesFiller;
 
@@ -40,7 +41,7 @@ public class Main {
 		
 		try {
 			
-			aeroflot.findAircraft(90,100);
+			aeroflot.findAircraft(100,190);
 		} catch (ReflectiveOperationException e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,8 @@
 package main.java;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import main.java.annotations.ByPassengers;
+import main.java.annotations.ByRange;
 import main.java.exceptions.RegistrationCodeFormatException;
 import main.java.exceptions.RegistrationException;
 
@@ -123,26 +125,27 @@ public class AirCompany {
 	
 	/**
 	 * Method, finds aircraft airfleet within given params.
-	 *
+	 * Uses annotations to specify  parameter type.
+	 * @see ByRange
+	 * @see ByPassengers
 	 * @param min minimum value
 	 * @param max maximum value
 	 */
+	@ByPassengers
 	public void findAircraft(int min, int max) throws  ReflectiveOperationException {
 		int coutResults = 0;
-		String methodName="getPassengers";
+		String methodName="";
 		System.out.println();
 		Annotation[] annotations = this.getClass().getMethod("findAircraft", new Class[]{int.class, int.class}).getAnnotations();
-		for (Annotation annotation : annotations) {
+		Annotation annotation = annotations[0];
 			if (annotation.annotationType().getSimpleName().equals("ByPassengers")) {
 				methodName = "getPassengers";
 				
 			} else if (annotation.annotationType().getSimpleName().equals("ByRange")) {
 				methodName = "getRange";
 			}
-		}
 		
-		
-		System.out.println("finding aircraft...");
+		System.out.println("finding aircraft by "+annotation.annotationType().getSimpleName().substring(2));
 		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers", "range(km)\n");
 		for (Aircraft aircraft : airFleet.values()) {
 			Method mtd = aircraft.getClass().getMethod(methodName);
