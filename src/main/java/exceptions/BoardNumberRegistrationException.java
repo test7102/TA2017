@@ -1,4 +1,4 @@
-package java.exceptions;
+package main.java.exceptions;
 
 public class BoardNumberRegistrationException extends Exception {
 	

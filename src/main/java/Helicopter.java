@@ -1,4 +1,4 @@
-package java;
+package main.java;
 
 public class Helicopter extends Aircraft {
 	private Boolean isMultiPurposeModel;

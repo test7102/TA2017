@@ -1,6 +1,7 @@
-package java;
+package main.java;
 
-import java.exceptions.BoardNumberRegistrationException;
+import main.java.exceptions.BoardNumberFormatException;
+import main.java.exceptions.BoardNumberRegistrationException;
 
 import java.util.*;
 
@@ -46,36 +47,40 @@ public class AirCompany {
 		this.headquarters = headquarters;
 	}
 	
-	public void addAircraft(String registrationCode, Aircraft aircraft) {
+	public void addAircraft(String boardNumber, Aircraft aircraft) {
+		Random rand = new Random();
+		int boardnumber = 0;
 		try {
-			Random rand = new Random();
-			if ("".equals(registrationCode)) {
-				throw new BoardNumberRegistrationException("Please enter board number for the plane");
-			}
-			// "RA-99999";
-			
-			
-			if (headquarters.equals(Headquarters.RUSSIA)) {
-				registrationCode = "RA-" + registrationCode;
-			} else if (headquarters.equals(Headquarters.USA)) {
-				registrationCode = "N-" + registrationCode;
-			} else if (headquarters.equals(Headquarters.GERMANY)) {
-				registrationCode = "D-" + registrationCode;
-			} else if (headquarters.equals(Headquarters.UAE)) {
-				registrationCode = "A6-" + registrationCode;
-			}
-			
-			if (AirCraftRegistrator.isBoardnumberAllowed(registrationCode)) {
-				AirCraftRegistrator.BOARDNUMBERS.add(registrationCode);
-				airFleet.put(registrationCode, aircraft);
+			boardnumber = Integer.parseInt(boardNumber);
+		} catch (NumberFormatException e) {
+			throw new BoardNumberFormatException("Wrong board  format, should be numbers only");
+		}
+		if (boardnumber < 0 || boardnumber > 99999) {
+			throw new BoardNumberFormatException("Wrong board number format, should be 0-99999 only");
+		}
+		
+		// "RA-99999";
+		if (headquarters.equals(Headquarters.RUSSIA)) {
+			boardNumber = "RA-" + boardnumber;
+		} else if (headquarters.equals(Headquarters.USA)) {
+			boardNumber = "N-" + boardnumber;
+		} else if (headquarters.equals(Headquarters.GERMANY)) {
+			boardNumber = "D-" + boardnumber;
+		} else if (headquarters.equals(Headquarters.UAE)) {
+			boardNumber = "A6-" + boardnumber;
+		}
+		try {
+			if (AirCraftRegistrator.isBoardnumberAllowed(boardNumber)) {
+				AirCraftRegistrator.BOARDNUMBERS.add(boardNumber);
+				airFleet.put(boardNumber, aircraft);
 			} else throw new BoardNumberRegistrationException("Board number already exists");
 		} catch (BoardNumberRegistrationException e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
 		
 	}
+	
 	public void sumCarryingCapacity() {
 		int sum = 0;
 		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {
@@ -84,7 +89,7 @@ public class AirCompany {
 		System.out.println("Total Carrying Capacity is " + sum + " passengers");
 	}
 	
-	public void	 sortPlanesByRange(){
+	public void sortPlanesByRange() {
 		List<Aircraft> aircraftsByRange = new ArrayList<Aircraft>(airFleet.values());
 		Collections.sort(aircraftsByRange, new Comparator<Aircraft>() {
 			
@@ -93,7 +98,7 @@ public class AirCompany {
 			}
 		});
 		
-		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers","range(km)\n");
+		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers", "range(km)\n");
 		for (Aircraft p : aircraftsByRange) {
 			p.printAircraftInfo();
 		}

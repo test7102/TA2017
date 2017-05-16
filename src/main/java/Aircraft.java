@@ -1,6 +1,6 @@
-package java;
+package main.java;
 
-import java.interfaces.IAircraftInfo;
+import main.java.interfaces.IAircraftInfo;
 
 public  class Aircraft implements IAircraftInfo {
 	private String ModelName;
@@ -51,7 +51,7 @@ public  class Aircraft implements IAircraftInfo {
 		if (!inFlight) {
 			System.out.println(ModelName + "flies away");
 		} else {
-			System.out.println("java.Aircraft already in a flight");
+			System.out.println("Aircraft already in a flight");
 		}
 		
 	}

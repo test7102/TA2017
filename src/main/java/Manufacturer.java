@@ -1,4 +1,4 @@
-package java;
+package main.java;
 
 public enum Manufacturer {
 	AIRBUS("Airbus", "EU"), BOEING("Boeing", "USA"), ANTONOV("Antonov", "RUS"), SUKHOI("Sukhoi", "RUS"),
