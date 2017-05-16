@@ -47,32 +47,28 @@ public class AirCompany {
 		this.headquarters = headquarters;
 	}
 	
-	public void addAircraft(String boardNumber, Aircraft aircraft) {
-		Random rand = new Random();
-		int boardnumber = 0;
-		try {
-			boardnumber = Integer.parseInt(boardNumber);
-		} catch (NumberFormatException e) {
-			throw new BoardNumberFormatException("Wrong board  format, should be numbers only");
-		}
-		if (boardnumber < 0 || boardnumber > 99999) {
+	public void addAircraft(int boardNumber, Aircraft aircraft) {
+		String registrationCode;
+		
+		if (boardNumber < 0 || boardNumber > 99999) {
 			throw new BoardNumberFormatException("Wrong board number format, should be 0-99999 only");
 		}
 		
 		// "RA-99999";
 		if (headquarters.equals(Headquarters.RUSSIA)) {
-			boardNumber = "RA-" + boardnumber;
+			registrationCode = "RA-" + boardNumber;
 		} else if (headquarters.equals(Headquarters.USA)) {
-			boardNumber = "N-" + boardnumber;
+			registrationCode = "N-" + boardNumber;
 		} else if (headquarters.equals(Headquarters.GERMANY)) {
-			boardNumber = "D-" + boardnumber;
+			registrationCode = "D-" + boardNumber;
 		} else if (headquarters.equals(Headquarters.UAE)) {
-			boardNumber = "A6-" + boardnumber;
-		}
+			registrationCode = "A6-" + boardNumber;
+		} else registrationCode = "I-" + boardNumber;
+		
 		try {
-			if (AirCraftRegistrator.isBoardnumberAllowed(boardNumber)) {
-				AirCraftRegistrator.BOARDNUMBERS.add(boardNumber);
-				airFleet.put(boardNumber, aircraft);
+			if (AirCraftRegistrator.isBoardnumberAllowed(registrationCode)) {
+				AirCraftRegistrator.BOARDNUMBERS.add(registrationCode);
+				airFleet.put(registrationCode, aircraft);
 			} else throw new BoardNumberRegistrationException("Board number already exists");
 		} catch (BoardNumberRegistrationException e) {
 			e.printStackTrace();

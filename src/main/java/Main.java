@@ -18,8 +18,10 @@ public class Main {
 		CompanyPlanesFiller.fill(aeroflot);
 		CompanyPlanesFiller.fill(utair);
 		
-		utair.addAircraft("99001", new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
-		utair.addAircraft("99002", new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
+		utair.addAircraft(99001, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
+		utair.addAircraft(99002, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
+		
+//		utair.addAircraft(10000, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false)); // throws BoardNumberFormatException
 		
 		
 		
