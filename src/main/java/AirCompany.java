@@ -1,7 +1,7 @@
 package main.java;
 
-import main.java.exceptions.BoardNumberFormatException;
-import main.java.exceptions.BoardNumberRegistrationException;
+import main.java.exceptions.RegistrationCodeFormatException;
+import main.java.exceptions.RegistrationException;
 
 import java.util.*;
 
@@ -17,12 +17,16 @@ public class AirCompany {
 		this.headquarters = headquarters;
 	}
 	
+	/**
+	 * Static inner class, holds up all aircraft registration codes  of companies and checks for its uniqueness.
+	 */
 	private static class AirCraftRegistrator {
 		
-		private static final ArrayList<String> BOARDNUMBERS = new ArrayList<String>();
+		private static final ArrayList<String> TAILNUMBERS = new ArrayList<String>();
+		
 		
 		public static boolean isBoardnumberAllowed(String registrationCode) {
-			return !BOARDNUMBERS.contains(registrationCode);
+			return !TAILNUMBERS.contains(registrationCode);
 			
 			
 		}
@@ -47,36 +51,44 @@ public class AirCompany {
 		this.headquarters = headquarters;
 	}
 	
-	public void addAircraft(int boardNumber, Aircraft aircraft) {
+	/**
+	 * Method, adds  aircraft  to airFeet list.
+	 * @param registrationNumber is unique registration code of aircraft
+	 * @param aircraft is Aircraft object , i.e., Plane or Helicopter
+	 */
+	public void addAircraft(int registrationNumber, Aircraft aircraft) {
 		String registrationCode;
 		
-		if (boardNumber < 0 || boardNumber > 99999) {
-			throw new BoardNumberFormatException("Wrong board number format, should be 0-99999 only");
+		if (registrationNumber < 0 || registrationNumber > 99999) {
+			throw new RegistrationCodeFormatException("Wrong board number format, should be 0-99999 only");
 		}
 		
 		// "RA-99999";
 		if (headquarters.equals(Headquarters.RUSSIA)) {
-			registrationCode = "RA-" + boardNumber;
+			registrationCode = "RA-" + registrationNumber;
 		} else if (headquarters.equals(Headquarters.USA)) {
-			registrationCode = "N-" + boardNumber;
+			registrationCode = "N-" + registrationNumber;
 		} else if (headquarters.equals(Headquarters.GERMANY)) {
-			registrationCode = "D-" + boardNumber;
+			registrationCode = "D-" + registrationNumber;
 		} else if (headquarters.equals(Headquarters.UAE)) {
-			registrationCode = "A6-" + boardNumber;
-		} else registrationCode = "I-" + boardNumber;
+			registrationCode = "A6-" + registrationNumber;
+		} else registrationCode = "I-" + registrationNumber;
 		
 		try {
 			if (AirCraftRegistrator.isBoardnumberAllowed(registrationCode)) {
-				AirCraftRegistrator.BOARDNUMBERS.add(registrationCode);
+				AirCraftRegistrator.TAILNUMBERS.add(registrationCode);
 				airFleet.put(registrationCode, aircraft);
-			} else throw new BoardNumberRegistrationException("Board number already exists");
-		} catch (BoardNumberRegistrationException e) {
+			} else throw new RegistrationException("Board number already exists");
+		} catch (RegistrationException e) {
 			e.printStackTrace();
 		}
 		
 		
 	}
 	
+	/**
+	 * Method, sums up aircrafts  carrying capacity.
+	 */
 	public void sumCarryingCapacity() {
 		int sum = 0;
 		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {

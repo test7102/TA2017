@@ -23,8 +23,8 @@ public class Main {
 		aeroflot.addAircraft(99001, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
 		utair.addAircraft(99002, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
 		
-//		utair.addAircraft(10000, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false)); // пример unchecked  BoardNumberFormatException
-//		utair.addAircraft(99002, new Plane("A319-100", Manufacturer.AIRBUS, 2, 156, 6850)); // пример checked  BoardNumberRegistrationException
+//		utair.addAircraft(10000, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false)); // пример unchecked  RegistrationCodeFormatException
+//		utair.addAircraft(99002, new Plane("A319-100", Manufacturer.AIRBUS, 2, 156, 6850)); // пример checked  RegistrationException
 		
 		
 		System.out.println("Сортировка самолетов компании по дальности полета ->");
