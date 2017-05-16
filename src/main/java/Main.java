@@ -1,7 +1,10 @@
 package main.java;
 
+import main.java.annotations.ByPassengers;
 import main.java.util.PrintDelimeter;
 import main.java.util.CompanyPlanesFiller;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class Main {
 	
@@ -33,6 +36,14 @@ public class Main {
 		System.out.println("Подсчёт общей вместимости ->");
 		aeroflot.sumCarryingCapacity();
 		PrintDelimeter.print();
+		
+		
+		try {
+			
+			aeroflot.findAircraft(90,100);
+		} catch (ReflectiveOperationException e) {
+			e.printStackTrace();
+		}
 		
 		
 	}

@@ -1,8 +1,12 @@
 package main.java;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import main.java.exceptions.RegistrationCodeFormatException;
 import main.java.exceptions.RegistrationException;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class AirCompany {
@@ -53,8 +57,9 @@ public class AirCompany {
 	
 	/**
 	 * Method, adds  aircraft  to airFeet list.
+	 *
 	 * @param registrationNumber is unique registration code of aircraft
-	 * @param aircraft is Aircraft object , i.e., Plane or Helicopter
+	 * @param aircraft           is Aircraft object , i.e., Plane or Helicopter
 	 */
 	public void addAircraft(int registrationNumber, Aircraft aircraft) {
 		String registrationCode;
@@ -110,10 +115,45 @@ public class AirCompany {
 		});
 		
 		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers", "range(km)\n");
-		for (Aircraft p : aircraftsByRange) {
-			p.printAircraftInfo();
+		for (Aircraft aircraft : aircraftsByRange) {
+			aircraft.printAircraftInfo();
 		}
 		
+	}
+	
+	/**
+	 * Method, finds aircraft airfleet within given params.
+	 *
+	 * @param min minimum value
+	 * @param max maximum value
+	 */
+	public void findAircraft(int min, int max) throws  ReflectiveOperationException {
+		int coutResults = 0;
+		String methodName="getPassengers";
+		System.out.println();
+		Annotation[] annotations = this.getClass().getMethod("findAircraft", new Class[]{int.class, int.class}).getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (annotation.annotationType().getSimpleName().equals("ByPassengers")) {
+				methodName = "getPassengers";
+				
+			} else if (annotation.annotationType().getSimpleName().equals("ByRange")) {
+				methodName = "getRange";
+			}
+		}
+		
+		
+		System.out.println("finding aircraft...");
+		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers", "range(km)\n");
+		for (Aircraft aircraft : airFleet.values()) {
+			Method mtd = aircraft.getClass().getMethod(methodName);
+			int methodReturnValue = (int) mtd.invoke(aircraft);
+			if (methodReturnValue >= min && methodReturnValue <= max) {
+				aircraft.printAircraftInfo();
+				coutResults++;
+			}
+			
+		}
+		System.out.println((coutResults == 0) ? "did not match any aircraft" : coutResults + " was found");
 	}
 	
 	
