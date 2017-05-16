@@ -1,14 +1,14 @@
 public class Plane extends AbstractAircraft {
-	String ModelName;
-	Manufacturer Manufacturer;
-	String registrationCode; // "RA-99999";
-	int crewSize;
-	int passengers;
 	
-	String enginesType;
-	int enginesCount;
+	public void checkWings () {
+		this.setInExploitation(false);
+		System.out.println("Checking "+super.getModelName()+" wings");
+	}
 	
-	
+	public Plane(String modelName, Manufacturer manufacturer, int crewSize, int passengers, int range) {
+		super(modelName, manufacturer, crewSize, passengers, range);
+		
+	}
 	
 	@Override
 	public void printAircraftInfo() {

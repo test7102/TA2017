@@ -1,31 +1,25 @@
 import exceptions.BoardNumberRegistrationException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class AirCompany {
 	private String name;
 	private Headquarters headquarters;
 	
-	private HashMap<String, AbstractAircraft> airFleet;
+	private HashMap<String, AbstractAircraft> airFleet = new HashMap<>();
 	
 	
 	private static class AirCraftRegistrator {
-		private static ArrayList Boardnumbers;
+		private static final ArrayList<String> BOARDNUMBERS = new ArrayList();
 		
 		public static boolean isBoardnumberAllowed(String registrationCode) {
-			if (Boardnumbers.contains(registrationCode)) {
-				return false;
-			} else return true;
+			return !BOARDNUMBERS.contains(registrationCode);
 			
 			
 		}
 	}
 	
-	private enum Headquarters {
-		RUSSIA, GERMANY, USA, UAE
-	}
+	
 	
 	public String getName() {
 		return name;
@@ -44,28 +38,38 @@ public class AirCompany {
 	}
 	
 	
-	public void addAircraft(String registrationCode, AbstractAircraft aircraft) throws BoardNumberRegistrationException {
-		Random rand = new Random();
-		if (registrationCode.equals("")) {
-			throw new BoardNumberRegistrationException();
+	public void addAircraft(String registrationCode, AbstractAircraft aircraft) {
+		try {
+			Random rand = new Random();
+			if ("".equals(registrationCode)) {
+				throw new BoardNumberRegistrationException("Please enter board number for the plane");
+			}
+			// "RA-99999";
+			
+			
+			if (headquarters.equals(Headquarters.RUSSIA)) {
+				registrationCode = "RA-" + registrationCode;
+			} else if (headquarters.equals(Headquarters.USA)) {
+				registrationCode = "N-" + registrationCode;
+			} else if (headquarters.equals(Headquarters.GERMANY)) {
+				registrationCode = "D-" + registrationCode;
+			} else if (headquarters.equals(Headquarters.UAE)) {
+				registrationCode = "A6-" + registrationCode;
+			}
+			
+			if (AirCraftRegistrator.isBoardnumberAllowed(registrationCode)) {
+				airFleet.put(registrationCode, aircraft);
+			} else throw new BoardNumberRegistrationException("Board number already exists");
+		} catch (BoardNumberRegistrationException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
-		
-		
-		if (headquarters.equals(Headquarters.RUSSIA)) {
-			registrationCode = "RA-" + registrationCode;
-		} else if (headquarters.equals(Headquarters.USA)) {
-			registrationCode = "N-" + registrationCode;
-		} else if (headquarters.equals(Headquarters.GERMANY)) {
-			registrationCode = "D-" + registrationCode;
-		} else if (headquarters.equals(Headquarters.UAE)) {
-			registrationCode = "A6-" + registrationCode;
-		}
-		
-		if (AirCraftRegistrator.isBoardnumberAllowed(registrationCode)) {
-			airFleet.put(registrationCode, aircraft);
-		} else throw new BoardNumberRegistrationException();
 		
 		
 	}
 	
+	public AirCompany(String name, Headquarters headquarters) {
+		this.name = name;
+		this.headquarters = headquarters;
+	}
 }
