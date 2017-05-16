@@ -1,4 +1,6 @@
-import interfaces.IAircraftInfo;
+package java;
+
+import java.interfaces.IAircraftInfo;
 
 public  class Aircraft implements IAircraftInfo {
 	private String ModelName;
@@ -49,7 +51,7 @@ public  class Aircraft implements IAircraftInfo {
 		if (!inFlight) {
 			System.out.println(ModelName + "flies away");
 		} else {
-			System.out.println("Aircraft already in a flight");
+			System.out.println("java.Aircraft already in a flight");
 		}
 		
 	}
@@ -70,7 +72,7 @@ public  class Aircraft implements IAircraftInfo {
 	
 	
 	public void printAircraftInfo() {
-		System.out.printf("%-10s %-12s %-5d %-10d %-10d\n", ModelName, Manufacturer, crewSize, passengers, range);
+		System.out.printf("%-13s |%-12s |%-5d |%-10d |%-10d\n", ModelName, Manufacturer, crewSize, passengers, range);
 		
 	}
 }

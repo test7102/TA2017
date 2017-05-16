@@ -1,4 +1,6 @@
-import exceptions.BoardNumberRegistrationException;
+package java;
+
+import java.exceptions.BoardNumberRegistrationException;
 
 import java.util.*;
 
@@ -74,7 +76,14 @@ public class AirCompany {
 		
 		
 	}
-	//TODO findPlane()
+	public void sumCarryingCapacity() {
+		int sum = 0;
+		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {
+			sum += entry.getValue().getPassengers();
+		}
+		System.out.println("Total Carrying Capacity is " + sum + " passengers");
+	}
+	
 	public void	 sortPlanesByRange(){
 		List<Aircraft> aircraftsByRange = new ArrayList<Aircraft>(airFleet.values());
 		Collections.sort(aircraftsByRange, new Comparator<Aircraft>() {
@@ -84,18 +93,12 @@ public class AirCompany {
 			}
 		});
 		
-		System.out.printf("%-10s %-12s %-5s %-10s %-10s", "model", "manufacturer", "crew", "passengers","range(km)\n");
+		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers","range(km)\n");
 		for (Aircraft p : aircraftsByRange) {
 			p.printAircraftInfo();
 		}
 		
 	}
 	
-	public void sumCarryingCapacity() {
-		int sum = 0;
-		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {
-			sum += entry.getValue().getPassengers();
-		}
-		System.out.println("Total Carrying Capacity is " + sum + " passengers");
-	}
+	//TODO findPlane()
 }
