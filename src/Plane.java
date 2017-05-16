@@ -1,4 +1,4 @@
-public class Plane extends AbstractAircraft {
+public class Plane extends Aircraft {
 	
 	public void checkWings () {
 		this.setInExploitation(false);
@@ -10,8 +10,5 @@ public class Plane extends AbstractAircraft {
 		
 	}
 	
-	@Override
-	public void printAircraftInfo() {
-		
-	}
+	
 }

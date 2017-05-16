@@ -1,4 +1,4 @@
-public class Helicopter extends AbstractAircraft {
+public class Helicopter extends Aircraft {
 	private Boolean isMultiPurposeModel;
 	
 	public void checkHeliRotor() {
@@ -12,9 +12,6 @@ public class Helicopter extends AbstractAircraft {
 		this.isMultiPurposeModel = multiPurposeModel;
 	}
 	
-	@Override
-	public void printAircraftInfo() {
-		
-	}
+	 
 	
 }

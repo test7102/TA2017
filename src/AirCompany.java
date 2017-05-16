@@ -6,10 +6,16 @@ public class AirCompany {
 	private String name;
 	private Headquarters headquarters;
 	
-	private HashMap<String, AbstractAircraft> airFleet = new HashMap<>();
+	private HashMap<String, Aircraft> airFleet = new HashMap<>();
 	
+	
+	public AirCompany(String name, Headquarters headquarters) {
+		this.name = name;
+		this.headquarters = headquarters;
+	}
 	
 	private static class AirCraftRegistrator {
+		
 		private static final ArrayList<String> BOARDNUMBERS = new ArrayList();
 		
 		public static boolean isBoardnumberAllowed(String registrationCode) {
@@ -17,9 +23,9 @@ public class AirCompany {
 			
 			
 		}
+		
+		
 	}
-	
-	
 	
 	public String getName() {
 		return name;
@@ -33,12 +39,12 @@ public class AirCompany {
 		return headquarters;
 	}
 	
+	
 	public void setHeadquarters(Headquarters headquarters) {
 		this.headquarters = headquarters;
 	}
 	
-	
-	public void addAircraft(String registrationCode, AbstractAircraft aircraft) {
+	public void addAircraft(String registrationCode, Aircraft aircraft) {
 		try {
 			Random rand = new Random();
 			if ("".equals(registrationCode)) {
@@ -58,6 +64,7 @@ public class AirCompany {
 			}
 			
 			if (AirCraftRegistrator.isBoardnumberAllowed(registrationCode)) {
+				AirCraftRegistrator.BOARDNUMBERS.add(registrationCode);
 				airFleet.put(registrationCode, aircraft);
 			} else throw new BoardNumberRegistrationException("Board number already exists");
 		} catch (BoardNumberRegistrationException e) {
@@ -67,9 +74,28 @@ public class AirCompany {
 		
 		
 	}
+	//TODO findPlane()
+	public void	 sortPlanesByRange(){
+		List<Aircraft> aircraftsByRange = new ArrayList<Aircraft>(airFleet.values());
+		Collections.sort(aircraftsByRange, new Comparator<Aircraft>() {
+			
+			public int compare(Aircraft t1, Aircraft t2) {
+				return t1.getRange() - t2.getRange();
+			}
+		});
+		
+		System.out.printf("%-10s %-12s %-5s %-10s %-10s", "model", "manufacturer", "crew", "passengers","range(km)\n");
+		for (Aircraft p : aircraftsByRange) {
+			p.printAircraftInfo();
+		}
+		
+	}
 	
-	public AirCompany(String name, Headquarters headquarters) {
-		this.name = name;
-		this.headquarters = headquarters;
+	public void sumCarryingCapacity() {
+		int sum = 0;
+		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {
+			sum += entry.getValue().getPassengers();
+		}
+		System.out.println("Total Carrying Capacity is " + sum + " passengers");
 	}
 }
