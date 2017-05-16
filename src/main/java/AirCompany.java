@@ -132,6 +132,9 @@ public class AirCompany implements IAircraftInfo{
 	 */
 	@ByPassengers
 	public void findAircraft(int min, int max) throws  ReflectiveOperationException {
+		if ((max<min)||(max<0)||(min<0)) {
+			throw new IllegalArgumentException("Please enter valid params only");
+		}
 		int coutResults = 0;
 		String methodName="";
 		System.out.println();

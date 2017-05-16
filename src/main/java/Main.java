@@ -16,13 +16,14 @@ public class Main {
 		AirCompany delta = new AirCompany("Delta Airlines", Headquarters.USA);
 		AirCompany lufthansa = new AirCompany("Lufthansa", Headquarters.GERMANY);
 		
-		System.out.println("Заполнение авиакомпании самолетами, через оберточный класс");
+		System.out.println("Заполнение авиакомпании самолетами, через вспомогательный класс");
 		CompanyPlanesFiller.fill(aeroflot);
 		CompanyPlanesFiller.fill(utair);
+		CompanyPlanesFiller.fill(delta);
+		
 		
 		System.out.println("Добавление отдельного воздушного судна");
 		aeroflot.addAircraft(99001, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
-		utair.addAircraft(99002, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
 		
 //		utair.addAircraft(10000, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false)); // пример unchecked  RegistrationCodeFormatException
 //		utair.addAircraft(99002, new Plane("A319-100", Manufacturer.AIRBUS, 2, 156, 6850)); // пример checked  RegistrationException
@@ -44,6 +45,13 @@ public class Main {
 		PrintDelimeter.print();
 		aeroflot.printAircraftInfo();
 		
-		
+		PrintDelimeter.print();
+		try {
+			delta.findAircraft(200,500);
+		} catch (ReflectiveOperationException e) {
+			e.printStackTrace();
+		}
+		PrintDelimeter.print();
+		delta.printAircraftInfo();
 	}
 }
