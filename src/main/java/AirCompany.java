@@ -85,6 +85,9 @@ public class AirCompany {
 		System.out.println("Total Carrying Capacity is " + sum + " passengers");
 	}
 	
+	/**
+	 * Method, sorts airfleet list of company by flight range.
+	 */
 	public void sortPlanesByRange() {
 		List<Aircraft> aircraftsByRange = new ArrayList<Aircraft>(airFleet.values());
 		Collections.sort(aircraftsByRange, new Comparator<Aircraft>() {
@@ -102,4 +105,5 @@ public class AirCompany {
 	}
 	
 	//TODO findPlane()
+	
 }

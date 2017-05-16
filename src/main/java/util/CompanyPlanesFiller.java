@@ -5,7 +5,10 @@ import main.java.Manufacturer;
 import main.java.Plane;
 
 public class CompanyPlanesFiller {
-	
+	/**
+	 *  Utility method, that populates airCompany with planes.
+	 * @param airCompany
+	 */
 	public static void fill(AirCompany airCompany) {
 		if ("Aeroflot".equals(airCompany.getName())) {
 			airCompany.addAircraft(56999, new Plane("777-300ER", Manufacturer.BOEING, 2, 550, 10190));
