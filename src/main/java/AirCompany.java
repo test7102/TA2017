@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class AirCompany implements IAircraftInfo{
+public class AirCompany implements IAircraftInfo {
 	private String name;
 	private Headquarters headquarters;
 	
@@ -58,9 +58,12 @@ public class AirCompany implements IAircraftInfo{
 	
 	/**
 	 * Method, adds  aircraft  to airFeet list.
+	 * <p>It has checked exception {@link RegistrationException} and
+	 * unchecked exception {@link RegistrationCodeFormatException}<p/>
 	 *
 	 * @param registrationNumber is unique registration code of aircraft
 	 * @param aircraft           is Aircraft object , i.e., Plane or Helicopter
+	 * @throws RegistrationCodeFormatException
 	 */
 	public void addAircraft(int registrationNumber, Aircraft aircraft) {
 		String registrationCode;
@@ -125,29 +128,32 @@ public class AirCompany implements IAircraftInfo{
 	/**
 	 * Method, finds aircraft airfleet within given params.
 	 * Uses annotations to specify  parameter type.
-	 * @see ByRange
-	 * @see ByPassengers
+	 *
 	 * @param min minimum value
 	 * @param max maximum value
+	 * @throws IllegalArgumentException
+	 * @throws ReflectiveOperationException
+	 * @see ByRange
+	 * @see ByPassengers
 	 */
 	@ByPassengers
-	public void findAircraft(int min, int max) throws  ReflectiveOperationException {
-		if ((max<min)||(max<0)||(min<0)) {
+	public void findAircraft(int min, int max) throws ReflectiveOperationException {
+		if ((max < min) || (max < 0) || (min < 0)) {
 			throw new IllegalArgumentException("Please enter valid params only");
 		}
 		int coutResults = 0;
-		String methodName="";
+		String methodName = "";
 		System.out.println();
 		Annotation[] annotations = this.getClass().getMethod("findAircraft", new Class[]{int.class, int.class}).getAnnotations();
 		Annotation annotation = annotations[0];
-			if (annotation.annotationType().getSimpleName().equals("ByPassengers")) {
-				methodName = "getPassengers";
-				
-			} else if (annotation.annotationType().getSimpleName().equals("ByRange")) {
-				methodName = "getRange";
-			}
+		if (annotation.annotationType().getSimpleName().equals("ByPassengers")) {
+			methodName = "getPassengers";
+			
+		} else if (annotation.annotationType().getSimpleName().equals("ByRange")) {
+			methodName = "getRange";
+		}
 		
-		System.out.println("finding aircraft by "+annotation.annotationType().getSimpleName().substring(2));
+		System.out.println("finding aircraft by " + annotation.annotationType().getSimpleName().substring(2));
 		System.out.printf("%-13s |%-12s |%-5s |%-10s |%-10s", "model", "manufacturer", "crew", "passengers", "range(km)\n");
 		for (Aircraft aircraft : airFleet.values()) {
 			Method mtd = aircraft.getClass().getMethod(methodName);
@@ -166,10 +172,10 @@ public class AirCompany implements IAircraftInfo{
 	 * This is implementation of following interface:
 	 */
 	@Override
-	public void printAircraftInfo () {
-		System.out.printf("%-18s |%-13s |%-12s |%-5s |%-10s |%-10s","registration code", "model", "manufacturer", "crew", "passengers", "range(km)\n");
+	public void printAircraftInfo() {
+		System.out.printf("%-18s |%-13s |%-12s |%-5s |%-10s |%-10s", "registration code", "model", "manufacturer", "crew", "passengers", "range(km)\n");
 		for (Map.Entry<String, Aircraft> entry : airFleet.entrySet()) {
-			System.out.printf("%-18s |",entry.getKey());
+			System.out.printf("%-18s |", entry.getKey());
 			entry.getValue().printAircraftInfo();
 		}
 	}

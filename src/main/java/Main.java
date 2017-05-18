@@ -1,11 +1,18 @@
 package main.java;
 
+import main.java.exceptions.RegistrationCodeFormatException;
+import main.java.exceptions.RegistrationException;
 import main.java.util.PrintDelimeter;
 import main.java.util.CompanyPlanesFiller;
 
 
 public class Main {
-	
+	/**
+	 * Main method demonstrates usage of AirCompany class, Plane and Helicopter classes.
+	 * Shows exception on line:32;  {@link AirCompany#addAircraft(int, Aircraft)} method
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		System.out.println("Создание авиакомпаний");
 		AirCompany aeroflot = new AirCompany("Aeroflot", Headquarters.RUSSIA);
@@ -21,12 +28,10 @@ public class Main {
 		CompanyPlanesFiller.fill(utair);
 		CompanyPlanesFiller.fill(delta);
 		
-		
 		System.out.println("Добавление отдельного воздушного судна");
 		aeroflot.addAircraft(99001, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false));
-		
-//		utair.addAircraft(10000, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false)); // пример unchecked  RegistrationCodeFormatException
-//		utair.addAircraft(99002, new Plane("A319-100", Manufacturer.AIRBUS, 2, 156, 6850)); // пример checked  RegistrationException
+//		utair.addAircraft(100000, new Helicopter("Mi-8p", Manufacturer.MIL, 3, 37, 590, false)); // пример unchecked  RegistrationCodeFormatException
+//		utair.addAircraft(99293, new Plane("A319-100", Manufacturer.AIRBUS, 2, 156, 6850)); // пример checked  RegistrationException
 		
 		
 		System.out.println("Сортировка самолетов компании по дальности полета ->");
@@ -38,7 +43,7 @@ public class Main {
 		
 		
 		try {
-			aeroflot.findAircraft(100,190);
+			aeroflot.findAircraft(100, 190);
 		} catch (ReflectiveOperationException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +52,7 @@ public class Main {
 		
 		PrintDelimeter.print();
 		try {
-			delta.findAircraft(200,500);
+			delta.findAircraft(200, 500);
 		} catch (ReflectiveOperationException e) {
 			e.printStackTrace();
 		}
