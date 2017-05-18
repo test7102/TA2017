@@ -11,6 +11,14 @@ public  class Aircraft implements IAircraftInfo {
 	private boolean inFlight = false;
 	private boolean inExploitation = true;
 	
+	/**
+	 * Aircraft constructor
+	 * @param modelName aircraft model name
+	 * @param manufacturer manufacturering company
+	 * @param crewSize aircraft crew
+	 * @param passengers passengers capacity
+	 * @param range flight range
+	 */
 	public Aircraft(String modelName, Manufacturer manufacturer, int crewSize, int passengers, int range) {
 		ModelName = modelName;
 		Manufacturer = manufacturer;
@@ -70,7 +78,10 @@ public  class Aircraft implements IAircraftInfo {
 		this.inFlight = inFlight;
 	}
 	
-	
+	/**
+	 * Method prints aircraft information;
+	 * This is implementation of following interface:
+	 */
 	public void printAircraftInfo() {
 		System.out.printf("%-13s |%-12s |%-5d |%-10d |%-10d\n", ModelName, Manufacturer, crewSize, passengers, range);
 		

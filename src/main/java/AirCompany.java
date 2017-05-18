@@ -163,6 +163,7 @@ public class AirCompany implements IAircraftInfo{
 	
 	/**
 	 * Method, prints all airfleet of that aircompany.
+	 * This is implementation of following interface:
 	 */
 	@Override
 	public void printAircraftInfo () {
