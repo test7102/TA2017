@@ -3,7 +3,6 @@ package main.java.util;
 import main.java.AirCompany;
 import main.java.Manufacturer;
 import main.java.Plane;
-import main.java.exceptions.RegistrationException;
 
 public class CompanyPlanesFiller {
 	/**

@@ -1,10 +1,7 @@
 package main.java;
 
-import main.java.exceptions.RegistrationCodeFormatException;
-import main.java.exceptions.RegistrationException;
 import main.java.util.PrintDelimeter;
 import main.java.util.CompanyPlanesFiller;
-
 
 public class Main {
 	/**
