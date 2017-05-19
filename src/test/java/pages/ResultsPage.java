@@ -25,12 +25,20 @@ public class ResultsPage {
 		buyitNowButton.click();
 	}
 	
+	/**
+	 * Collects items titles on result page
+	 * @return
+	 */
 	public ArrayList<String> getItemsTitles() {
 		for (WebElement itemTitlesOnSnippet : itemsTitlesOnSnippets) {
 			titles.add(itemTitlesOnSnippet.getText());
 		}
 		return titles;
 	}
+	/**
+	 * Collects items links
+	 * @return
+	 */
 	public ArrayList<String> getItemsLinks() {
 		for (WebElement itemTitlesOnSnippet : itemsTitlesOnSnippets) {
 			titlesLinks.add(itemTitlesOnSnippet.getAttribute("href"));

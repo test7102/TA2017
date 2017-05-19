@@ -24,7 +24,6 @@ public class TestTitleTypos {
 		jse.executeScript("document.getElementById('gh-eb-Geo-a-en').click();");
 	}
 	
-	
 	@DataProvider
 	public Object[][] dataArray() {
 		return new Object[][]{
@@ -34,11 +33,8 @@ public class TestTitleTypos {
 				{"kkeyboard", "keyboard"},
 				{"keibord", "keyboard"},
 				{"keyboad", "keyboard"},
-			
 		};
-		
 	}
-	
 	
 	@Test(dataProvider = "dataArray")
 	public void testTitleTypos(String typo, String expected) {

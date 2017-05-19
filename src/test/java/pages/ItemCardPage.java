@@ -13,6 +13,13 @@ public class ItemCardPage {
 	private static final String ITEM_CARD_TITLE_LOCATOR = "//h1[@id='itemTitle']";
 	@FindBy(xpath = ITEM_CARD_TITLE_LOCATOR)
 	private WebElement titleOnItemCard;
+	
+	/**
+	 * This implementation checks only first 10 elements {@link ItemCardPage#FIRST_TEN_ITEMS_ONLY}
+	 * due to slowness of webdriver
+	 * @param titles
+	 * @param titlesLinks
+	 */
 	public void checkTitlesOnCards (ArrayList<String> titles,ArrayList<String> titlesLinks) {
 		String titleTextOnSnippet;
 		String titleTextOnItemCard;

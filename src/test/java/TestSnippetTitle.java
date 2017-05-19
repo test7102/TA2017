@@ -10,7 +10,6 @@ import pages.ItemCardPage;
 import pages.ResultsPage;
 import pages.SearchPage;
 
-
 public class TestSnippetTitle {
 	private static final String URL = "https://ebay.com/";
 	private WebDriver driver;
@@ -27,16 +26,17 @@ public class TestSnippetTitle {
 	@Test
 	public void testItemsTitles() {
 		
-		SearchPage searchPage = PageFactory.initElements(driver,SearchPage.class);
+		SearchPage searchPage = PageFactory.initElements(driver, SearchPage.class);
 		searchPage.search("keyboard");
 		
-		ResultsPage resultsPage = PageFactory.initElements(driver,ResultsPage.class);
+		ResultsPage resultsPage = PageFactory.initElements(driver, ResultsPage.class);
 		resultsPage.clickOnBuyitnow();
-		ItemCardPage itemCardPage = PageFactory.initElements(driver,ItemCardPage.class);
-		itemCardPage.checkTitlesOnCards(resultsPage.getItemsTitles(),resultsPage.getItemsLinks());
+		ItemCardPage itemCardPage = PageFactory.initElements(driver, ItemCardPage.class);
+		itemCardPage.checkTitlesOnCards(resultsPage.getItemsTitles(), resultsPage.getItemsLinks());
 	}
+	
 	@AfterClass
-	public void tearDown () {
+	public void tearDown() {
 		driver.quit();
 	}
 	
