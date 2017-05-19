@@ -1,3 +1,4 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +20,8 @@ public class TestSnippetTitle {
 		driver = new ChromeDriver();
 		driver.get(URL);
 		driver.manage().window().maximize();
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("document.getElementById('gh-eb-Geo-a-en').click();");
 	}
 	
 	@Test
@@ -28,13 +31,13 @@ public class TestSnippetTitle {
 		searchPage.search("keyboard");
 		
 		ResultsPage resultsPage = PageFactory.initElements(driver,ResultsPage.class);
+		resultsPage.clickOnBuyitnow();
 		ItemCardPage itemCardPage = PageFactory.initElements(driver,ItemCardPage.class);
 		itemCardPage.checkTitlesOnCards(resultsPage.getItemsTitles(),resultsPage.getItemsLinks());
 	}
 	@AfterClass
 	public void tearDown () {
 		driver.quit();
-		
 	}
 	
 }

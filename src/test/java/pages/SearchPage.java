@@ -15,6 +15,7 @@ public class SearchPage {
 	private WebElement button;
 	
 	public void search(String text) {
+		searchField.clear();
 		button.sendKeys("");
 		searchField.sendKeys(text);
 		button.click();

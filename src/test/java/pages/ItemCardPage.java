@@ -8,17 +8,17 @@ import java.util.ArrayList;
 
 
 public class ItemCardPage {
-	WebDriver driver;
+	private WebDriver driver;
+	public static final int FIRST_TEN_ITEMS_ONLY = 10;
 	private static final String ITEM_CARD_TITLE_LOCATOR = "//h1[@id='itemTitle']";
 	@FindBy(xpath = ITEM_CARD_TITLE_LOCATOR)
 	private WebElement titleOnItemCard;
 	public void checkTitlesOnCards (ArrayList<String> titles,ArrayList<String> titlesLinks) {
-			
 		String titleTextOnSnippet;
 		String titleTextOnItemCard;
-		for (int i = 0; i < titles.size() ; i++) {
-			driver.get(titlesLinks.get(i));
+		for (int i = 0; i < FIRST_TEN_ITEMS_ONLY ; i++) {
 			titleTextOnSnippet = titles.get(i);
+			driver.get(titlesLinks.get(i));
 			titleTextOnItemCard = titleOnItemCard.getText();
 			System.out.println("Snippet title: " + titleTextOnSnippet+"\n On card: "+titleTextOnItemCard);
 			Assert.assertTrue(titleTextOnSnippet.contains(titleTextOnItemCard));
