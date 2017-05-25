@@ -62,8 +62,8 @@ public class TestRefinements {
 	public void cleanUrl() {
 		if (!driver.getCurrentUrl().equals(URL)) {
 			driver.get(URL + "sch/i.html?&_ipg=" + ITEMS_PER_PAGE);
-			searchPage.setLanguageToEnglish();
 			searchPage.search("flash drive");
+			searchPage.setLanguageToEnglish();
 			resultsPage.clickOnBuyitnow();
 		}
 	}
@@ -102,7 +102,7 @@ public class TestRefinements {
 		priceForm.setLowPrice(MINIMUM_PRICE);
 		priceForm.setHighPrice(MAXIMUM_PRICE);
 		priceForm.click();
-		ArrayList<String> prices = new ArrayList();
+		ArrayList<String> prices;
 		prices = resultsPage.getItemsPrices();
 		for (String price : prices) {
 			lowPriceFromItemSnippet = PriceParser.getFirstPrice(price);
@@ -125,7 +125,7 @@ public class TestRefinements {
 		
 		int matchCounter = 0;
 		capacityCheckBox.click();
-		ArrayList<String> titles = new ArrayList();
+		ArrayList<String> titles;
 		titles = resultsPage.getItemsTitles();
 		String tmpTitle;
 		for (String title : titles) {
