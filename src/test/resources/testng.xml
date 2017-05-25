@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Filters Suite">
+    <test name="EbayRefinements">
+        <classes>
+            <class name="TestRefinements">
+                <methods>
+                    <include name="testBrandFilter"/>
+                    <include name="testPriceFiler"/>
+                    <include name="testCapacityFilter"/>
+                    <include name="testUsbFilter"/>
+                    <include name="testFreeShipingFilter"/>
+                    <include name="testConditionFilter"/>
+                    <include name="testShowOnlyFilter"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite> <!-- Default Suite -->
