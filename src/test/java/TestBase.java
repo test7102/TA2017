@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import pages.ItemCardPage;
 import pages.ResultsPage;
 import pages.SearchPage;
@@ -46,5 +47,19 @@ public class TestBase {
 	@AfterClass(enabled = true)
 	public void tearDown() {
 		driver.quit();
+	}
+	
+	/**
+	 * <p>Method cleans url before each test.
+	 * <p>It uses url   {@link TestBase#URL} and {@link TestBase#ITEMS_PER_PAGE} to set items per page for result set.
+	 */
+	@BeforeMethod
+	public void cleanUrl() {
+		if (!driver.getCurrentUrl().equals(URL)) {
+			driver.get(URL);
+			searchPage.search("flash drive");
+			searchPage.setLanguageToEnglish();
+			resultsPage.clickOnBuyitnow();
+		}
 	}
 }

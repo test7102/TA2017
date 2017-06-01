@@ -1,6 +1,5 @@
 import elements.*;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import util.PriceParser;
 
@@ -12,20 +11,6 @@ import static org.testng.Assert.assertTrue;
  * @author Vivyen
  */
 public class TestRefinements extends TestBase {
-	
-	/**
-	 * <p>Method cleans url before each test.
-	 * <p>It uses url   {@link TestBase#URL} and {@link TestBase#ITEMS_PER_PAGE} to set items per page for result set.
-	 */
-	@BeforeMethod
-	public void cleanUrl() {
-		if (!driver.getCurrentUrl().equals(URL)) {
-			driver.get(URL);
-			searchPage.search("flash drive");
-			searchPage.setLanguageToEnglish();
-			resultsPage.clickOnBuyitnow();
-		}
-	}
 	
 	/**
 	 * <p>Method tests brand checkbox.<p/>
@@ -153,7 +138,7 @@ public class TestRefinements extends TestBase {
 		itemlinks = resultsPage.getItemsLinks();
 		String itemCondition;
 		for (String itemlink : itemlinks) {
-			driver.get(itemlink);
+			itemCardPage.navigateToItemPage(itemlink);
 			itemCondition = itemCardPage.getItemCondition();
 			if (itemCondition.toLowerCase().contains(ConditionCheckBox.CONDITION.toLowerCase())) {
 				matchCounter++;
@@ -178,7 +163,7 @@ public class TestRefinements extends TestBase {
 		itemlinks = resultsPage.getItemsLinks();
 		String itemStatus;
 		for (String itemlink : itemlinks) {
-			driver.get(itemlink);
+			itemCardPage.navigateToItemPage(itemlink);
 			itemStatus = itemCardPage.getItemStatus();
 			if (itemStatus.toLowerCase().contains(ShowOnlyCheckBox.SOLD_LISTINGS_MESSAGE_ON_ITEM_CARD.toLowerCase())
 					| itemStatus.toLowerCase().contains(ShowOnlyCheckBox.SOLD_LISTINGS_MESSAGE__ON_ITEM_CARD_2.toLowerCase())) {

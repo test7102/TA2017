@@ -31,4 +31,7 @@ public class ItemCardPage {
 	public String getItemStatus() {
 		return itemStatus.getText();
 	}
+	public void navigateToItemPage (String url) {
+			driver.get(url);
+	}
 }
