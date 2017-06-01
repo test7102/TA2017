@@ -19,7 +19,10 @@ public class SearchPage {
 	@FindBy(xpath = ENGLISH_LOCATOR)
 	private WebElement language;
 	
-	public void search(String text) {
+	public void search(String searchPageUrl, String text) {
+		if (!driver.getCurrentUrl().equals(searchPageUrl)) {
+			driver.get(searchPageUrl);
+		}
 		searchField.clear();
 		button.sendKeys("");
 		searchField.sendKeys(text);
@@ -34,10 +37,10 @@ public class SearchPage {
 	/**
 	 * Method uses JavascriptExecutor to switch language to english
 	 */
-	public void setLanguageToEnglish () {
-			if (!language.getText().contains("English")) {
-				JavascriptExecutor jse = (JavascriptExecutor) driver;
-				jse.executeScript("document.getElementById('gh-eb-Geo-a-en').click();");
-			}
+	public void setLanguageToEnglish() {
+		if (!language.getText().contains("English")) {
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("document.getElementById('gh-eb-Geo-a-en').click();");
+		}
 	}
 }

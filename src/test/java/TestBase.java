@@ -13,9 +13,9 @@ import pages.SearchPage;
  * @see TestRefinements
  */
 public class TestBase {
-	protected static final int ITEMS_PER_PAGE = 25;
+	public static final int ITEMS_PER_PAGE = 25;
 	protected static final double REQUIRED_MATCH_RATIO = 0.7;
-	protected static final String URL = "https://ebay.com/sch/i.html?&_ipg=" + ITEMS_PER_PAGE;
+	public static final String URL = "https://ebay.com/sch/i.html?&_ipg=" + ITEMS_PER_PAGE;
 	protected WebDriver driver;
 	protected SearchPage searchPage;
 	protected ResultsPage resultsPage;
@@ -54,12 +54,9 @@ public class TestBase {
 	 * <p>It uses url   {@link TestBase#URL} and {@link TestBase#ITEMS_PER_PAGE} to set items per page for result set.
 	 */
 	@BeforeMethod
-	public void cleanUrl() {
-		if (!driver.getCurrentUrl().equals(URL)) {
-			driver.get(URL);
-			searchPage.search("flash drive");
+	public void startNewSearch() {
+			searchPage.search(URL,"flash drive");
 			searchPage.setLanguageToEnglish();
 			resultsPage.clickOnBuyitnow();
-		}
 	}
 }
