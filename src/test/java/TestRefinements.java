@@ -1,13 +1,7 @@
 import elements.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.testng.Assert;
-import org.testng.annotations.*;
-
-import pages.ItemCardPage;
-import pages.ResultsPage;
-import pages.SearchPage;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import util.PriceParser;
 
 import java.util.ArrayList;
@@ -17,51 +11,16 @@ import static org.testng.Assert.assertTrue;
 /**
  * @author Vivyen
  */
-public class TestRefinements {
-	private static final int ITEMS_PER_PAGE = 25;
-	private static final double REQUIRED_MATCH_RATIO = 0.7;
-	private static final String URL = "https://ebay.com/";
-	private WebDriver driver;
-	private SearchPage searchPage;
-	private ResultsPage resultsPage;
-	private ItemCardPage itemCardPage;
-	private PriceForm priceForm;
-	private BrandCheckBox brandCheckBox;
-	private CapacityCheckBox capacityCheckBox;
-	private UsbCheckBox usbCheckBox;
-	private FreeShippingCheckBox freeShippingCheckBox;
-	private ConditionCheckBox conditionCheckBox;
-	private ShowOnlyCheckBox showOnlyCheckBox;
-
-	@BeforeClass
-	public void setUP() {
-		driver = new ChromeDriver();
-//		driver.manage().window().maximize();
-		searchPage = new SearchPage(driver);
-		resultsPage = new ResultsPage(driver);
-		priceForm = new PriceForm(driver);
-		itemCardPage = new ItemCardPage(driver);
-		brandCheckBox = new BrandCheckBox(driver);
-		capacityCheckBox = new CapacityCheckBox(driver);
-		usbCheckBox = new UsbCheckBox(driver);
-		freeShippingCheckBox = new FreeShippingCheckBox(driver);
-		conditionCheckBox = new ConditionCheckBox(driver);
-		showOnlyCheckBox = new ShowOnlyCheckBox(driver);
-	}
-	
-	@AfterClass(enabled = true)
-	public void tearDown() {
-		driver.quit();
-	}
+public class TestRefinements extends TestBase {
 	
 	/**
-	 * <p>Method cleans url before each test.<p/>
-	 *  It uses url parameter {@code &_ipg=} to set items per page for result set.
+	 * <p>Method cleans url before each test.
+	 * <p>It uses url   {@link TestBase#URL} and {@link TestBase#ITEMS_PER_PAGE} to set items per page for result set.
 	 */
 	@BeforeMethod
 	public void cleanUrl() {
 		if (!driver.getCurrentUrl().equals(URL)) {
-			driver.get(URL + "sch/i.html?&_ipg=" + ITEMS_PER_PAGE);
+			driver.get(URL);
 			searchPage.search("flash drive");
 			searchPage.setLanguageToEnglish();
 			resultsPage.clickOnBuyitnow();
@@ -208,7 +167,7 @@ public class TestRefinements {
 	 * <p>Method tests showonly checkbox.<p/>
 	 * It uses {@link ShowOnlyCheckBox} class to find elements
 	 */
-	@Test(enabled = true)
+	@Test
 	public void testShowOnlyFilter() {
 		System.out.println("Starting showonly filter test");
 		int currentItem = 1;
