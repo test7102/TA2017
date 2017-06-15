@@ -1,6 +1,6 @@
-package main.java;
+package com.javatask;
 
-import main.java.interfaces.IAircraftInfo;
+import   com.javatask.interfaces.*;
 
 public  class Aircraft implements IAircraftInfo {
 	private String ModelName;

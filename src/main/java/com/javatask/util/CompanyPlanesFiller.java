@@ -1,13 +1,13 @@
-package main.java.util;
+package com.javatask.util;
 
-import main.java.AirCompany;
-import main.java.Manufacturer;
-import main.java.Plane;
+import com.javatask.AirCompany;
+import com.javatask.Manufacturer;
+import com.javatask.Plane;
 
 public class CompanyPlanesFiller {
 	/**
 	 *  Utility method, that populates airCompany with planes(hardcoded).
-	 * @param airCompany
+	 * @param airCompany company instance
 	 */
 	public static void fill(AirCompany airCompany) {
 		if ("Aeroflot".equals(airCompany.getName())) {

@@ -1,7 +1,7 @@
-package main.java;
+package com.javatask;
 
-import main.java.util.PrintDelimeter;
-import main.java.util.CompanyPlanesFiller;
+import com.javatask.util.PrintDelimeter;
+import com.javatask.util.CompanyPlanesFiller;
 
 public class Main {
 	/**
@@ -39,20 +39,12 @@ public class Main {
 		PrintDelimeter.print();
 		
 		
-		try {
-			aeroflot.findAircraft(100, 190);
-		} catch (ReflectiveOperationException e) {
-			e.printStackTrace();
-		}
+		aeroflot.findAircraft(100, 190);
 		PrintDelimeter.print();
 		aeroflot.printAircraftInfo();
 		
 		PrintDelimeter.print();
-		try {
-			delta.findAircraft(200, 500);
-		} catch (ReflectiveOperationException e) {
-			e.printStackTrace();
-		}
+		delta.findAircraft(200, 500);
 		PrintDelimeter.print();
 		delta.printAircraftInfo();
 	}

@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package   com.javatask.exceptions;
 
 public class RegistrationException extends Exception {
 	

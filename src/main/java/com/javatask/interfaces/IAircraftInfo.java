@@ -1,7 +1,7 @@
-package main.java.interfaces;
+package com.javatask.interfaces;
 
-import main.java.AirCompany;
-import main.java.Aircraft;
+import com.javatask.AirCompany;
+import com.javatask.Aircraft;
 
 /**
  * This interface has 2 implementations:

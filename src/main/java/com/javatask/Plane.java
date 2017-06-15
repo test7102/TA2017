@@ -1,4 +1,4 @@
-package main.java;
+package com.javatask;
 
 public class Plane extends Aircraft {
 	

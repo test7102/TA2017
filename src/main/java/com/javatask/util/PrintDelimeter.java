@@ -1,4 +1,4 @@
-package main.java.util;
+package com.javatask.util;
 
 
 public  class PrintDelimeter {
